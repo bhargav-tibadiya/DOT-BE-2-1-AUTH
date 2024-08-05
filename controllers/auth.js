@@ -85,7 +85,7 @@ exports.login = async (req, res) => {
     // Verify Password and Generate JWT Token
     if (bcrypt.compare(password, userData.password)) {
 
-      let token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1m' })
+      let token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1m' })
       userData.token = token;
       userData.password = undefined;
 
