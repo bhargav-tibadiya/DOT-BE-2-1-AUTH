@@ -1,10 +1,12 @@
 const express = require('express')
+const cookieParser = require('cookie-parser')
 const app = express();
 
 
 require('dotenv').config();
 const port = process.env.PORT || 4000;
 
+app.use(cookieParser());
 app.use(express.json());
 
 //  Importing routes

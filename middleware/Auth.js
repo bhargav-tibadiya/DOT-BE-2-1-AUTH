@@ -4,7 +4,13 @@ require('dotenv').config()
 exports.auth = (req, res, next) => {
   try {
 
-    const token = req.body.token || req.cookies.token;
+    // Printing Token from all method
+
+    console.log('cookies', req.cookies.token);
+    console.log('body ', req.body.token);
+    console.log('header', req.header("Authoriztion"));
+
+    const token = req.body.token || req.cookies.token || req.header("Authoriztion").replace("Bearer ", "");
 
     if (!token) {
       return res.status(401).json({
@@ -54,8 +60,8 @@ exports.isStudent = (req, res, next) => {
     next();
 
   } catch (error) {
-      console.log('Error in auth Middleware || ', error)
-      return res.status(401).json({
+    console.log('Error in auth Middleware || ', error)
+    return res.status(401).json({
       success: false,
       message: "Some error occured in isStudent Middleware"
     });
